@@ -217,6 +217,11 @@ class CustomDataset(Dataset):
                 # )
                 self.log_annot_issue_y = False
             ymin = ymin - 1
+            
+        if xmin < 0: xmin=0
+        if ymin < 0: ymin=0
+        if xmax >1: xmax=1
+        if ymax >1: ymax=1
         return xmin, ymin, xmax, ymax
 
 
@@ -314,7 +319,7 @@ class CustomDataset(Dataset):
         target["iscrowd"] = iscrowd
         image_id = torch.tensor([idx])
         target["image_id"] = image_id
-        print(image_id, boxes) #HERE
+        #print(image_id, boxes) #HERE
 
 
         if self.use_train_aug: # Use train augmentation if argument is passed.
